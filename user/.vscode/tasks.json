@@ -1,0 +1,31 @@
+{
+    "tasks": [
+        {
+            "type": "cppbuild",
+            "label": "C/C++: gcc 生成活动文件",
+            "command": "/usr/bin/riscv64-linux-gnu-gcc",
+            "args": [
+                "-g",
+                "${file}",
+                "-o",
+                "_${fileDirname}/${fileBasenameNoExtension}",
+                "-I",
+                "/home/cannedfish/Develop_Project/xv6-labs-2020",
+                "-nostdinc",
+                "-g"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "调试器生成的任务。"
+        }
+    ],
+    "version": "2.0.0"
+}

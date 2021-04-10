@@ -695,3 +695,19 @@ procdump(void)
     printf("\n");
   }
 }
+
+
+//See func:allocproc()
+int
+getUnusedProcNum(void)
+{
+  int i;
+  int count=0;
+
+  for(i=1; i < NPROC; i++) {
+    if(proc[i].state != UNUSED) {
+      count++;
+    } 
+  }
+  return count;
+}

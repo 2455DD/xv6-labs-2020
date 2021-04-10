@@ -150,6 +150,7 @@ freeproc(struct proc *p)
   p->killed = 0;
   p->xstate = 0;
   p->state = UNUSED;
+  p->mask=0;
 }
 
 // Create a user page table for a given process,
@@ -259,7 +260,7 @@ int
 fork(void)
 {
   int i, pid;
-  struct proc *np;
+  struct proc *np;     //New Process's PCB
   struct proc *p = myproc();
 
   // Allocate process.
@@ -277,6 +278,7 @@ fork(void)
 
   np->parent = p;
 
+  np->mask=p->mask;
   // copy saved user registers.
   *(np->trapframe) = *(p->trapframe);
 

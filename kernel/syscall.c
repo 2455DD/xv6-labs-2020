@@ -165,9 +165,11 @@ syscall(void)
 
   num = p->trapframe->a7; //a7里面存的是system call number, 所以 num就是system call number
   if(num > 0 && num < NELEM(syscalls) && syscalls[num]) {
-    p->trapframe->a0 = syscalls[num]();       //a0存的是Func_ptr
-    if(p->mask&&(1<<num)==1){                      //trace的条件: 当前进程的掩码存在且掩码中对应的控制bit为1
-      printf("%d: %s read -> %d",
+    p->trapframe->a0 = syscalls[num]();       //a0存的是函数返回值
+    //trace的条件: 当前进程的掩码存在且掩码中对应的控制bit为1
+    //转为位运算后为掩码与指定位进行位与运算
+    if(p->mask&(1<<num)){                      
+      printf("%d: syscall %s -> %d\n",
             p->pid,sysname[num],p->trapframe->a0);
     }
   } else {
